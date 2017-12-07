@@ -17,19 +17,6 @@ input = <<~EOF
 3928	107	3406	123	2111	2749	223	125	134	146	3875	1357	508	1534	4002	4417
 EOF
 
-def checksum(input)
-  result = 0
-
-  input.split("\n").each do |line|
-    digits = line.split(' ').map(&:to_i)
-    result += digits.max - digits.min
-  end
-
-  result
-end
-
-puts checksum(input)
-
 def devision(input)
   result = 0
 
