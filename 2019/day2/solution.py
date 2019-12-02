@@ -9,7 +9,6 @@ OPERATIONS = {
     2: mul,
 }
 
-
 def iterate(ints):
     for pos, i in enumerate(ints):
         if pos % OP_CODE_POS == 0:
@@ -24,12 +23,16 @@ def iterate(ints):
 
                 yield op_code, (first_value, last_value), ints[last_in_pos]
 
-
-def part1(ints):
+def process_memeory(ints):
     for op_code, values, replace_pos in iterate(ints):
         operation = OPERATIONS[op_code]
         ints[replace_pos] = operation(*values)
 
+    return ints
+
+
+def part1(ints):
+    process_memeory(ints)
     return ints
 
 
@@ -49,26 +52,46 @@ class TestPart1(unittest.TestCase):
         self.assertEqual(result, [2, 0, 0, 0, 99])
 
     def test_2(self):
-        result = part1([2, 3, 0, 3, 99])
+        result = part1([2,3,0,3,99])
 
-        self.assertEqual(result, [2, 3, 0, 6, 99])
+        self.assertEqual(result, [2,3,0,6,99])
 
     def test_3(self):
-        result = part1([2, 4, 4, 5, 99, 0])
+        result = part1([2,4,4,5,99,0])
 
-        self.assertEqual(result, [2, 4, 4, 5, 99, 9801])
+        self.assertEqual(result, [2,4,4,5,99,9801])
 
     def test_5(self):
-        result = part1([1, 1, 1, 4, 99, 5, 6, 0, 99])
+        result = part1([1,1,1,4,99,5,6,0,99])
 
-        self.assertEqual(result, [30, 1, 1, 4, 2, 5, 6, 0, 99])
+        self.assertEqual(result, [30,1,1,4,2,5,6,0,99])
 
 
 # unittest.main(verbosity=2)
 
-ints = list(map(int, open("input.txt").read().split(",")))
+ints = list(
+    map(int, open("input.txt").read().split(','))
+)
 
 ints[1] = 12
 ints[2] = 2
 
-print(part1(ints)[0])
+# print(part1(ints)[0])
+
+def part2():
+    find = 19690720
+    noun = range(0, 100)
+    verb = range(0, 100)
+
+    for n in noun:
+        for v in verb:
+            ints[1] = n
+            ints[2] = v
+
+            _ints = list(ints)
+            res = process_memeory(_ints)
+            if res[0] == find:
+                answer = 100 * n + v
+                return answer
+
+print(part2())
