@@ -39,10 +39,10 @@ function solution2(input) {
         first = first - 1;
         second = second - 1;
 
-        const bothInPass = password[first] === targetChar && password[second] === targetChar;
-        const norInPass = password[first] !== targetChar && password[second] !== targetChar;
-        const invalid = bothInPass || norInPass;
-        if (!invalid) {
+        const onFirstPlace = password[first] === targetChar;
+        const onSecondPlace = password[second] === targetChar;
+        const valid = onFirstPlace !== onSecondPlace;
+        if (valid) {
             valid_passwords++;
         }
     });
