@@ -13,21 +13,17 @@ const regex = /(\d*)-(\d*) (\w): (\w*)/;
 function solution(input) {
     let valid_passwords = 0;
     input.forEach(function(row) {
-        const vars = regex.exec(row);
-        const min = vars[1];
-        const max = vars[2];
-        const targetChar = vars[3];
-        const password = vars[4];
+        const [, min, max, targetChar, password] = regex.exec(row);
         let counts = 0;
 
         for (let i = 0; i < password.length; i++) {
             if (password[i] === targetChar) {
-                counts += 1;
+                counts++;
             }
         }
 
         if (counts >= min && counts <= max) {
-            valid_passwords += 1;
+            valid_passwords++;
         }
     });
 
@@ -39,17 +35,15 @@ console.log(solution(input));
 function solution2(input) {
     let valid_passwords = 0;
     input.forEach(function(row) {
-        const vars = regex.exec(row);
-        const first = vars[1] - 1;
-        const second = vars[2] - 1;
-        const targetChar = vars[3];
-        const password = vars[4];
+        let [, first, second, targetChar, password] = regex.exec(row);
+        first = first - 1;
+        second = second - 1;
 
         const bothInPass = password[first] === targetChar && password[second] === targetChar;
         const norInPass = password[first] !== targetChar && password[second] !== targetChar;
         const invalid = bothInPass || norInPass;
         if (!invalid) {
-            valid_passwords += 1;
+            valid_passwords++;
         }
     });
 
