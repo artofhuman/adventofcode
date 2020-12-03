@@ -2,11 +2,11 @@ import { readFileSync } from 'fs';
 
 export function toNums(elems) {
     return elems.map(function (elem) {
-        return Number(elem);
+        return parseInt(elem);
     })
 }
 
 export function readNums(filePath) {
-    const input = readFileSync(filePath, 'utf8').split("\n");
+    const input = readFileSync(filePath, 'utf8').trim().split("\n");
     return toNums(input);
 }
