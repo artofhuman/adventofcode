@@ -35,3 +35,25 @@ function solution(input) {
 }
 
 console.log(solution(input));
+
+function solution2(input) {
+    let valid_passwords = 0;
+    input.forEach(function(row) {
+        const vars = regex.exec(row);
+        const first = vars[1] - 1;
+        const second = vars[2] - 1;
+        const targetChar = vars[3];
+        const password = vars[4];
+
+        const bothInPass = password[first] === targetChar && password[second] === targetChar;
+        const norInPass = password[first] !== targetChar && password[second] !== targetChar;
+        const invalid = bothInPass || norInPass;
+        if (!invalid) {
+            valid_passwords += 1;
+        }
+    });
+
+    return valid_passwords;
+}
+
+console.log(solution2(input));
