@@ -34,4 +34,14 @@ function getSitId(row) {
     return sitId;
 }
 
-console.log(Math.max(...rows.map(getSitId)));
+const allIds = rows.map(getSitId);
+const maxId = Math.max(...allIds);
+const minId = Math.min(...allIds);
+
+let i = minId;
+while (i <= maxId) {
+    if (!(allIds.includes(i))) {
+        console.log(i);
+    }
+    i++;
+}
