@@ -12,4 +12,23 @@ function calculate(groups) {
     return result;
 }
 
-console.log(calculate(groupsData));
+function calculatePart2(groups) {
+    let result = 0;
+
+    groups.forEach(group => {
+        const answers = group.split("\n");
+        const firstPersonChars = answers[0].trim().split('');
+
+        firstPersonChars.forEach(char => {
+            let match = answers.every(a => a.includes(char));
+            if (match) {
+                result++;
+            }
+        });
+    });
+
+    return result;
+}
+
+console.log("part1", calculate(groupsData));
+console.log("part2", calculatePart2(groupsData));
