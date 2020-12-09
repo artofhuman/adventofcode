@@ -6,8 +6,12 @@ export function toNums(elems) {
     })
 }
 
-export function readFile(filePath) {
-    return readFileSync(filePath, 'utf8').trim().split("\n");
+export function readFile(filePath, split="\n") {
+    const data = readFileSync(filePath, 'utf8').trim();
+    if (split.length) {
+        return data.split(split);
+    }
+    return data;
 }
 
 export function readNums(filePath) {
