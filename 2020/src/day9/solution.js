@@ -7,15 +7,14 @@ console.log(numbers);
 const preambleSize = 25;
 
 function hasSumOfTwo(numbers, target) {
+    const checkSet = new Set(numbers);
+
     for (let i = 0; i < numbers.length; i++) {
-        for (let j = 0; j < numbers.length; j++) {
-            const a = numbers[i];
-            const b = numbers[j];
-            if (a != b) {
-                if ( a + b === target) {
-                    return true;
-                }
-            }
+        const a = numbers[i];
+        const diff = target - a;
+
+        if (checkSet.has(diff)) {
+            return true;
         }
     }
 
