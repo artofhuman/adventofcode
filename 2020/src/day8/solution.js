@@ -20,17 +20,16 @@ function calculate(instruction, acc, pos) {
   }
 }
 
-
-function solution(data) {
+function part1(data) {
   let acc = 0;
   let pos = 0;
   const executed = new Set();
 
-  while (true) {
+  while (data.length != pos) {
     const currentInst = data[pos];
 
     if (executed.has(pos)) {
-      break;
+      return [acc, true]
     }
 
     executed.add(pos);
@@ -40,8 +39,35 @@ function solution(data) {
     pos = nextPos;
   }
 
-  // console.log(executed);
-  console.log(acc);
+  return [acc, false]
 }
 
-solution(data);
+function getPositions(data, name) {
+  const pos = [];
+  for (let i = 0; i < data.length; i++) {
+    const line = data[i];
+    if (line.includes(name)) {
+      pos.push(i);
+    }
+  }
+
+  return pos;
+}
+
+function part2(data) {
+  const jmpPositions = getPositions(data, 'jmp');
+
+  // just check jmp first and its right guess
+  jmpPositions.forEach(posiblePos => {
+    const newLine = data[posiblePos].replace("jmp", "nop");
+    const newData = [...data];
+    newData[posiblePos] = newLine;
+
+    const [acc, isLoop] = part1(newData);
+
+    console.log(isLoop, acc);
+  });
+}
+
+console.log(part1(data));
+console.log(part2(data));
