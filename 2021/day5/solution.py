@@ -19,10 +19,6 @@ def sign(x):
     return -1 if x < 0 else 1
 
 
-def make_range(c1, c2):
-    return range(c1, c2 + 1) if c2 >= c1 else range(c2, c1 + 1)
-
-
 max_x = 0
 for line in test_input:
     c1, c2 = line.split(" -> ")
@@ -35,19 +31,10 @@ for line in test_input:
     x_inc = sign(x2 - x1)
     y_inc = sign(y2 - y1)
 
-    if x1 == x2:
-        while y1 != y2 + y_inc:
-            overlaps[(x1, y1)] += 1
-            y1 += y_inc
-    elif y1 == y2:
-        while x1 != x2 + x_inc:
-            overlaps[(x1, y1)] += 1
-            x1 += x_inc
-    else: # + part 2
-        while x1 != x2 + x_inc or y1 != y2 + y_inc:
-            overlaps[(x1, y1)] += 1
-            x1 += x_inc
-            y1 += y_inc
+    while (x1, y1) != (x2 + x_inc, y2 + y_inc):
+        overlaps[(x1, y1)] += 1
+        x1 += x_inc
+        y1 += y_inc
 
 result = 0
 for i in overlaps.values():
