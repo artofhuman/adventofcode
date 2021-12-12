@@ -1,6 +1,3 @@
-from collections import defaultdict
-
-
 nums = [int(n) for n in open('input.txt').read().split(',')]
 
 def cost(n):
