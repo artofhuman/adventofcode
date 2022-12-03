@@ -12,3 +12,6 @@ end
 
 part1 = calories_by_elf.max_by(&:sum).sum
 part2 = calories_by_elf.sort_by(&:sum).reverse.take(3).map(&:sum).sum
+
+puts part1
+puts part2
