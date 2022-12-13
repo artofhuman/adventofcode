@@ -64,19 +64,41 @@ def neighbors(cur)
   end
 end
 
-q = [start]
-distances = {start => 0}
 
-until q.empty?
-  cur = q.shift
-  distance = distances[cur]
+def part1(start, stop)
+  q = [start]
+  distances = {start => 0}
 
-  neighbors(cur).each do |neighbor|
-    if distances[neighbor].nil?# || distances[neighbor] > distance + 1
-      q << neighbor
-      distances[neighbor] = distance + 1
+  until q.empty?
+    cur = q.shift
+    distance = distances[cur]
+
+    neighbors(cur).each do |neighbor|
+      if distances[neighbor].nil?# || distances[neighbor] > distance + 1
+        q << neighbor
+        distances[neighbor] = distance + 1
+      end
     end
   end
+
+  distances[stop]
 end
 
-puts distances[stop]
+puts "part1"
+puts part1(start, stop)
+
+def part2(stop)
+  distances = []
+  M.times do |i|
+    N.times do |j|
+      if GRID[i][j] == "a"
+        distances << part1([i, j], stop)
+      end
+    end
+  end
+
+  distances.compact!.min
+end
+
+puts "part2"
+puts part2(stop)
